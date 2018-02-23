@@ -76,8 +76,8 @@ namespace csharp3pc.Actor
           foreach (var cohort in state.StateData.Cohorts)
           {
             cohort.Tell(new AbortMsg());
-            return GoTo(CoordinatorState.Aborted);
           }
+          return GoTo(CoordinatorState.Aborted);
         }
 
         return null;
@@ -111,13 +111,14 @@ namespace csharp3pc.Actor
           Log("received StateTimeout, sending AborMsgs");
           foreach (var cohort in state.StateData.Cohorts)
           {
+            Log($"Sending abort to {cohort.Path}");
             cohort.Tell(new AbortMsg());
-            return GoTo(CoordinatorState.Aborted);
           }
+          return GoTo(CoordinatorState.Aborted);
         }
 
         return null;
-      }, TimeSpan.FromSeconds(10));
+      }, TimeSpan.FromSeconds(5));
 
 
       When(CoordinatorState.Commited, _ =>

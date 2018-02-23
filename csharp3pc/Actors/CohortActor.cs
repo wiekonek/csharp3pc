@@ -2,9 +2,6 @@
 using csharp3pc.Data;
 using csharp3pc.Messages;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace csharp3pc.Actor
@@ -37,8 +34,13 @@ namespace csharp3pc.Actor
 
       When(CohortState.Waiting, state =>
       {
+        
         if (state.FsmEvent is PreCommitMsg)
         {
+          //if (Self.Path.Name == "Coohort0")
+          //{
+          //  Task.Delay(TimeSpan.FromSeconds(15)).Wait();
+          //}
           Log("received PreCommitMsg");
           Sender.Tell(new AckMsg());
           return GoTo(CohortState.Prepared);
