@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  csharp3pc:
+    image: csharp3pc
+    build:
+      context: .\csharp3pc
+      dockerfile: Dockerfile
